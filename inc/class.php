@@ -45,6 +45,7 @@ class Defaulttab extends Tabdata {
 	}
 }
 class Acftab extends Tabdata {
+	protected $output;
 	function __construct() {
 		$this->name = 'Acf';
 		$this->label = __('Acf','custom-field-snippet');
@@ -81,7 +82,6 @@ class Acftab extends Tabdata {
 		return $output;
 	}
 	function output_field($fields,$sub=false) {
-		static $output;
 		if ($sub) {
 			$format = " get_sub_field('%s')";
 		} else {
@@ -94,27 +94,27 @@ class Acftab extends Tabdata {
 			$before = "&lt;?php <br>" . PHP_EOL;
 			$after = "?&gt; <br>" . PHP_EOL;
 			$this->cfs_add_conditional($fields,$field,$before,$after);
-			$output .= $before;
+			$this->output .= $before;
 			if ($field['type'] == 'repeater') {
-				$output .= sprintf($formatif,$field['name']);
-				$output .= "<br>" . PHP_EOL;
-				$output .= sprintf($formatsubwhile,$field['name']);
-				$output .= "<br>" . PHP_EOL;
-				$output .= $after ;
-				$output .= $this->output_field($field['sub_fields'],true);
-				$output .= $before;
-				$output .= "} // ";
-				$output .= sprintf($formatsubwhile,$field['name']);
-				$output .= "<br>" . PHP_EOL;
-				$output .= "} // ";
-				$output .= sprintf($formatif,$field['name']);
+				$this->output .= sprintf($formatif,$field['name']);
+				$this->output .= "<br>" . PHP_EOL;
+				$this->output .= sprintf($formatsubwhile,$field['name']);
+				$this->output .= "<br>" . PHP_EOL;
+				$this->output .= $after ;
+				$this->output_field($field['sub_fields'],true);
+				$this->output .= $before;
+				$this->output .= "} // ";
+				$this->output .= sprintf($formatsubwhile,$field['name']);
+				$this->output .= "<br>" . PHP_EOL;
+				$this->output .= "} // ";
+				$this->output .= sprintf($formatif,$field['name']);
 			} else {
-				$output .= sprintf($formatecho,$field['name']);
+				$this->output .= sprintf($formatecho,$field['name']);
 			}
-			$output .= "<br>" . PHP_EOL;
-			$output .= $after ;
+			$this->output .= "<br>" . PHP_EOL;
+			$this->output .= $after ;
 		}
-		return $output;
+		return $this->output;
 	}
 	function get_field_name_from_key($fields,$fieldname) {
 		foreach ($fields as $field2) {
