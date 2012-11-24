@@ -68,7 +68,12 @@ function cfs_meta_box($post) {
 <?php 
 	foreach($GLOBALS['cfs_tabs'] as $obj) {
 		print '    <div id="tabs-'. esc_attr($obj->getlabel()) .'">';
-		print $obj->getdata();
+		print "\n";
+		print '    <textarea readonly style="min-height:200px;width:100%;" onclick="this.focus();this.select()">';
+		print esc_html($obj->getdata());
+		print '    </textarea>';
+		print "<hr>\n";
+		_e('Please save the post before you paste these codes.','custom-field-snippet');
 		print '    </div>';
 	} 
 ?>

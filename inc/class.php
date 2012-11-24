@@ -34,11 +34,11 @@ class Defaulttab extends Tabdata {
 				unset( $metadata[ $key ] );
 		}
 		$output = "&lt;?php \$post->ID = $post->ID;?&gt;";
-		$output .= "<br>" . PHP_EOL;
+		$output .= PHP_EOL;
 		$format = "&lt;?php echo get_post_meta(\$post->ID, '%s', true);?&gt;";
 		foreach ( $metadata as $key => $value ) {
 			$output .= sprintf($format,$value['meta_key']);
-			$output .= "<br>" . PHP_EOL;
+			$output .= PHP_EOL;
 		}
 		return $output;
 
@@ -64,7 +64,7 @@ class Acftab extends Tabdata {
 				$field_name = $this->get_field_name_from_key($fields,$rule['field']);
 				$if[] = 'get_field("' . $field_name . '") ' . $rule['operator'] . ' "' . $rule['value'] . '"' ;
 			}
-			$before .= " if (" . implode($join,$if) . ") { <br>" . PHP_EOL;
+			$before .= " if (" . implode($join,$if) . ") { ";
 			$after = "} " . $after;
 		}
 	}
@@ -77,8 +77,6 @@ class Acftab extends Tabdata {
 			$fields = $acf->get_acf_fields($box);
 			$output .= $this->output_field($fields);
 		}
-		$output .= "<hr>";
-		$output .= __('Please save the post before you paste these codes.','custom-field-snippet');
 		return $output;
 	}
 	function output_field($fields,$sub=false) {
@@ -91,28 +89,32 @@ class Acftab extends Tabdata {
 		$formatif = "if (" . $format . ") {";
 		$formatsubwhile = " while(has_sub_field('%s')) {";
 		foreach ( $fields as $field ) {
-			$before = "&lt;?php <br>" . PHP_EOL;
-			$after = "?&gt; <br>" . PHP_EOL;
+			$before = "&lt;?php ";
+			$after = "?&gt; ";
 			$this->cfs_add_conditional($fields,$field,$before,$after);
 			$this->output .= $before;
+			$this->output .= PHP_EOL;
 			if ($field['type'] == 'repeater') {
 				$this->output .= sprintf($formatif,$field['name']);
-				$this->output .= "<br>" . PHP_EOL;
+				$this->output .= PHP_EOL;
 				$this->output .= sprintf($formatsubwhile,$field['name']);
-				$this->output .= "<br>" . PHP_EOL;
+				$this->output .= PHP_EOL;
 				$this->output .= $after ;
+				$this->output .= PHP_EOL;
 				$this->output_field($field['sub_fields'],true);
 				$this->output .= $before;
+				$this->output .= PHP_EOL;
 				$this->output .= "} // ";
 				$this->output .= sprintf($formatsubwhile,$field['name']);
-				$this->output .= "<br>" . PHP_EOL;
+				$this->output .= PHP_EOL;
 				$this->output .= "} // ";
 				$this->output .= sprintf($formatif,$field['name']);
 			} else {
 				$this->output .= sprintf($formatecho,$field['name']);
 			}
-			$this->output .= "<br>" . PHP_EOL;
+			$this->output .= PHP_EOL;
 			$this->output .= $after ;
+			$this->output .= PHP_EOL;
 		}
 		return $this->output;
 	}
