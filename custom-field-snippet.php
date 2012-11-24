@@ -39,9 +39,9 @@ function cfs_meta_box($post) {
 
 		if (class_exists('Acf')) {
 			register_cfs_tabs('Acftab');
+			register_cfs_tabs('Acfshortcode');
 		} 
 		register_cfs_tabs('Defaulttab');	    
-
 	} else {
 		print '<p>';
 		_e('Your License key is not active. ','custom-field-snippet');
@@ -55,30 +55,35 @@ function cfs_meta_box($post) {
 		jQuery( "#tabs" ).tabs();
 	});
 	</script>
-
+<?php
+	if ('post' == get_post_type() || 'page' == get_post_type() || check_post_type_license() == -1 || check_post_type_license() >= date("Y")) {
+?>
 <div id="tabs">
 	<ul>
 <?php 
 	foreach($GLOBALS['cfs_tabs'] as $obj) {
-		print '    <li><a href="#tabs-'. esc_attr($obj->getlabel()) .'" class="nav-tab" style="float:left;">' . esc_html($obj->getlabel()) .'</a></li>';
+		print '    <li><a href="#tabs-'. esc_attr($obj->getname()) .'" class="nav-tab" style="float:left;">' . esc_html($obj->getlabel()) .'</a></li>';
 		print '    </li>';
 	} 
 ?>
 	</ul>
 <?php 
 	foreach($GLOBALS['cfs_tabs'] as $obj) {
-		print '    <div id="tabs-'. esc_attr($obj->getlabel()) .'">';
-		print "\n";
-		print '    <textarea readonly style="min-height:200px;width:100%;" onclick="this.focus();this.select()">';
-		print esc_html($obj->getdata());
-		print '    </textarea>';
-		print "<hr>\n";
+		print '    <div id="tabs-'. esc_attr($obj->getname()) .'">';
+		print PHP_EOL;
+		$tab_format = '    <textarea readonly style="min-height:200px;width:100%%;">%s</textarea>';
+		$data = esc_html($obj->getdata());
+		printf(apply_filters('cfs_tab_format',$tab_format),$data);
+		print "<hr>";
+		print PHP_EOL;
 		_e('Please save the post before you paste these codes.','custom-field-snippet');
 		print '    </div>';
 	} 
 ?>
 </div>
-
+<?php
+}
+?>
 
 </div>
 <?php

@@ -127,3 +127,33 @@ class Acftab extends Tabdata {
 		return $fieldname;
 	}
 }
+class Acfshortcode extends Tabdata {
+	protected $output;
+	function __construct() {
+		$this->name = 'Acfsc';
+		$this->label = __('Acf Short Code','custom-field-snippet');
+	}
+	function getdata() {
+		global $acf;
+		global $post;
+		$boxes = $acf->get_input_metabox_ids(array('post_id' => $post->ID), false);
+		$output = '';
+		foreach ( $boxes as $box) {
+			$fields = $acf->get_acf_fields($box);
+			$output .= $this->output_field($fields,$post->ID);
+		}
+		return $output;
+	}
+	function output_field($fields,$postid='') {
+		if ('' == $postid){
+			global $post;
+			$postid = $post->ID;
+		}
+		$format = '[acf field="%s" post_id="%d"]';
+		foreach ( $fields as $field ) {
+			$this->output .= sprintf($format,$field['name'],$postid);
+			$this->output .= PHP_EOL;
+		}
+		return $this->output;
+	}
+}
