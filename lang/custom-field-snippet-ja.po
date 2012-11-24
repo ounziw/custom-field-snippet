@@ -1,0 +1,86 @@
+# Copyright (C) 2012 Custom Field Snippet
+# This file is distributed under the same license as the Custom Field Snippet package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Custom Field Snippet\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/custom-field-snippet\n"
+"POT-Creation-Date: 2012-11-19 07:59:05+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2012-11-19 17:11+0900\n"
+"Last-Translator: Fumito MIZUNO <ounziw@gmail.com>\n"
+"Language-Team: Fumito MIZUNO <mizuno@php-web.net>\n"
+"X-Poedit-Language: Japanese\n"
+"X-Poedit-Country: JAPAN\n"
+
+#: custom-field-snippet.php:24
+#: custom-field-snippet.php:192
+msgid "Your License key is not active. "
+msgstr "ライセンスキーは有効ではありません。"
+
+#: custom-field-snippet.php:25
+msgid "If you want to use Custom Field Snippet in any post type, you need a license key. "
+msgstr "Custom Field Snippet を全ての投稿タイプで使用したい場合、ライセンスキーが必要です。"
+
+#: custom-field-snippet.php:26
+#: custom-field-snippet.php:190
+#: custom-field-snippet.php:193
+msgid "You can buy the key <a href=\"%s\">here</a>"
+msgstr "ライセンスキーは<a href=\"%s\">こちら</a>で入手できます。"
+
+#. #-#-#-#-#  plugin.pot (Custom Field Snippet 1.1)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: custom-field-snippet.php:137
+#: custom-field-snippet.php:145
+msgid "Custom Field Snippet"
+msgstr "Custom Field Snippet"
+
+#: custom-field-snippet.php:150
+msgid "License for any Post Type"
+msgstr "全ての投稿タイプで使用するためのライセンスキー"
+
+#: custom-field-snippet.php:155
+msgid "License Key"
+msgstr "ライセンスキー"
+
+#: custom-field-snippet.php:165
+msgid "You can buy a key and enjoy custom field snippet on any Post Type"
+msgstr "キーを購入すると、全ての投稿タイプで custom field snippet が使用できます。"
+
+#: custom-field-snippet.php:174
+msgid "You do not have sufficient permissions to access this page."
+msgstr "このページにアクセスする十分な権限がありません。"
+
+#: custom-field-snippet.php:181
+msgid "Save Changes"
+msgstr "変更を保存する"
+
+#: custom-field-snippet.php:186
+msgid "Your License key is active. "
+msgstr "ライセンスキーは有効です。"
+
+#: custom-field-snippet.php:187
+msgid "Valid until December 31st,  %d."
+msgstr "有効期限: %d 年 12 月 31 日"
+
+#: custom-field-snippet.php:189
+msgid "Your License key is expired. "
+msgstr "ライセンスキーは期限切れです。"
+
+#. Plugin URI of the plugin/theme
+msgid "http://wp.php-web.net/?p=275"
+msgstr "http://wp.php-web.net/?p=275"
+
+#. Description of the plugin/theme
+msgid "This plugin creates and shows the snippets which display your custom field data. You can display your custom field data, by pasting these codes to your theme."
+msgstr "カスタムフィールドのデータを表示するスニペットを作成し、表示します。これらのコードをお使いのテーマにペーストすると、カスタムフィールドのデータを表示できます。"
+
+#. Author of the plugin/theme
+msgid "Fumito MIZUNO"
+msgstr "Fumito MIZUNO"
+
+#. Author URI of the plugin/theme
+msgid "http://wp.php-web.net/"
+msgstr "http://wp.php-web.net/"
+
