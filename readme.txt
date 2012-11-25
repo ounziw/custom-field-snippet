@@ -4,7 +4,7 @@ Donate link: http://pledgie.com/campaigns/8706
 Tags: custom field, snippet, theme
 Requires at least: 3.4
 Tested up to: 3.4.2
-Stable tag: 2.0
+Stable tag: 2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -43,6 +43,10 @@ But it is ethically recommended to buy a license key for each site.
 
 == Changelog ==
 
+2.1 add filter: cfs_tabs_class
+
 2.0 JQuery UI tab. Supports user defined tab.
+
 1.2 internationalization ready
+
 1.1 new feature: Advanced Custom Fields repeater field

@@ -37,8 +37,7 @@ class CustomTest extends PHPUnit_Framework_TestCase {
 		$after = "?&gt;";
 		$this->obj->cfs_add_conditional($this->field,$input,$before,$after);
 		$expected = <<<EOF
-&lt;?php if (get_field("field1") == "1" || get_field("field2") != "abc") { <br>
-
+&lt;?php if (get_field("field1") == "1" || get_field("field2") != "abc") { 
 EOF;
 		$expected2 = "} ?&gt;";
 		$this->assertEquals($expected, $before);
@@ -57,12 +56,12 @@ EOF;
 		);	
 		$output = $this->obj->output_field($field,false);
 		$expected = <<<EOF
-&lt;?php <br>
-echo  get_field('name1');<br>
-?&gt; <br>
-&lt;?php <br>
-echo  get_field('name2');<br>
-?&gt; <br>
+&lt;?php 
+echo  get_field('name1');
+?&gt; 
+&lt;?php 
+echo  get_field('name2');
+?&gt; 
 
 EOF;
 		$this->assertEquals($expected, $output);

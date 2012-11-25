@@ -3,7 +3,7 @@
 Plugin Name: Custom Field Snippet
 Plugin URI: http://wp.php-web.net/?p=275
 Description: This plugin creates and shows the snippets which display your custom field data. You can display your custom field data, by pasting these codes to your theme.
-Version: 2.0
+Version: 2.1
 Author: Fumito MIZUNO
 Author URI: http://wp.php-web.net/
 License: GPL ver.2 or later
@@ -25,8 +25,7 @@ include('inc/class.php');
 function register_cfs_tabs($class)
 {
 	if (is_subclass_of($class,'Tabdata')) {
-		$obj = new $class();
-		$GLOBALS['cfs_tabs'][] = $obj;
+		$GLOBALS['cfs_tabs'][] = $class;
 	}
 }
 
@@ -61,28 +60,34 @@ function cfs_meta_box($post) {
 <div id="tabs">
 	<ul>
 <?php 
-	foreach($GLOBALS['cfs_tabs'] as $obj) {
-		print '    <li><a href="#tabs-'. esc_attr($obj->getname()) .'" class="nav-tab" style="float:left;">' . esc_html($obj->getlabel()) .'</a></li>';
-		print '    </li>';
-	} 
+		// you can modify the output array of register_cfs_tabs.
+		$cfs_tabs_class = apply_filters('cfs_tabs_class',$GLOBALS['cfs_tabs']);
+		foreach($cfs_tabs_class as $class) {
+			$obj = new $class();
+			$cfs_tabs_obj[] = $obj;
+		}
+		foreach($cfs_tabs_obj as $obj) {
+			print '    <li><a href="#tabs-'. esc_attr($obj->getname()) .'" class="nav-tab" style="float:left;">' . esc_html($obj->getlabel()) .'</a></li>';
+			print '    </li>';
+		} 
 ?>
 	</ul>
 <?php 
-	foreach($GLOBALS['cfs_tabs'] as $obj) {
-		print '    <div id="tabs-'. esc_attr($obj->getname()) .'">';
-		print PHP_EOL;
-		$tab_format = '    <textarea readonly style="min-height:200px;width:100%%;">%s</textarea>';
-		$data = esc_html($obj->getdata());
-		printf(apply_filters('cfs_tab_format',$tab_format),$data);
-		print "<hr>";
-		print PHP_EOL;
-		_e('Please save the post before you paste these codes.','custom-field-snippet');
-		print '    </div>';
-	} 
+		foreach($cfs_tabs_obj as $obj) {
+			print '    <div id="tabs-'. esc_attr($obj->getname()) .'">';
+			print PHP_EOL;
+			$tab_format = '    <textarea readonly style="min-height:200px;width:100%%;">%s</textarea>';
+			$data = esc_html($obj->getdata());
+			printf(apply_filters('cfs_tab_format',$tab_format),$data);
+			print "<hr>";
+			print PHP_EOL;
+			_e('Please save the post before you paste these codes.','custom-field-snippet');
+			print '    </div>';
+		} 
 ?>
 </div>
 <?php
-}
+	}
 ?>
 
 </div>
