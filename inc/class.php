@@ -35,7 +35,7 @@ class Defaulttab extends Tabdata {
 		}
 		$output = "&lt;?php \$post->ID = $post->ID;?&gt;";
 		$output .= PHP_EOL;
-		$format = "&lt;?php echo get_post_meta(\$post->ID, '%s', true);?&gt;";
+		$format = "&lt;?php echo esc_html(get_post_meta(\$post->ID, '%s', true));?&gt;";
 		foreach ( $metadata as $key => $value ) {
 			$output .= sprintf($format,$value['meta_key']);
 			$output .= PHP_EOL;
@@ -85,7 +85,7 @@ class Acftab extends Tabdata {
 		} else {
 			$format = " get_field('%s')";
 		}
-		$formatecho = "echo " . $format . ";";
+		$formatecho = "echo esc_html(" . $format . ");";
 		$formatif = "if (" . $format . ") {";
 		$formatsubwhile = " while(has_sub_field('%s')) {";
 		foreach ( $fields as $field ) {

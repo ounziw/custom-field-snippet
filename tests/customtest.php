@@ -57,10 +57,10 @@ EOF;
 		$output = $this->obj->output_field($field,false);
 		$expected = <<<EOF
 &lt;?php 
-echo  get_field('name1');
+echo esc_html( get_field('name1'));
 ?&gt; 
 &lt;?php 
-echo  get_field('name2');
+echo esc_html( get_field('name2'));
 ?&gt; 
 
 EOF;
